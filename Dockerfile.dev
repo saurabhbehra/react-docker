@@ -1,0 +1,17 @@
+#specify base image
+FROM node:19-alpine
+
+#if this path doesnot exist it will be created in the system
+WORKDIR /usr/app
+
+#install dependencies
+COPY ./package.json ./
+RUN npm install
+
+#copy rest files
+COPY ./ ./
+
+
+#default command
+CMD ["npm","run","start"]
+
