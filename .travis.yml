@@ -1,0 +1,28 @@
+# on branch master means whenever code is pushed
+# to master branch then only deploy
+# this yml file will run a set of test and if all tests pass
+# then deploys to beanstalk service in aws
+# beanstalk can scale automatically based on load
+# it creates load balancer automatically
+sudo: required
+services:
+  - docker
+
+before_install:
+  docker build -t react -f Dockerfile.dev .
+
+script:
+  - docker run react npm run test -- --coverage
+
+deploy:
+  provide: elasticbeanstalk
+  region: "regin in beanstalk"
+  app: "name of app created in beanstalk"
+  env: "name of env in beanstalk"
+  bucket_name: "name of s3 bucket created by beanstalk"
+  bucket_path: "name of app folder inside s3"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"

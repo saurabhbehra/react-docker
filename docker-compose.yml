@@ -1,3 +1,4 @@
+# this file is just for volume demo {context is path from where to pick dockerfile if name is different}
 version: '3'
 services:
   web:

@@ -1,0 +1,29 @@
+DOCKER COMMANDS
+=========================================================================================
+docker run busybox ping google.com // busybox is name of image and ping is a process
+docker ps -all // to get all running container
+docker create hello-world // run = create +start
+docket start -a createdId
+docker system prune //to delete all containers
+docker logs createdId //logs for the created container
+docker stop/kill <container id>
+docker exec -it <container id> redis cli //{1. docker run redis} for running another coomand in same container
+docker exec -it <container id> sh // for accessing terminal inside container
+docker build .
+
+docker run -p 5000:6000 <container id>//5000 is loacalhost port mapped to 6000 is container port 
+
+
+================docker compose for connecting multiple container through some networking (it connects automatically internally) and starting single command==============
+
+docker-compose up //run for docker-compose.yml 
+docker-compose up --build // if content of your code has changed
+docker-compose up -d // for running in background
+docker-compose down // for stopping 
+
+==============docker volume (this command give refernce to the file change and no need to rebuild the image)=============================
+docker build -f Dockerfile.dev . (for building with specific docker file name)
+docker run -p 3000:3000 -v /app/node_modules -v $(pwd):/app <container id> {has problem in window file even with docker compose did not work}
+
+=====docker for build file with nginx=============
+docker run -p 8080:80 <container id>
